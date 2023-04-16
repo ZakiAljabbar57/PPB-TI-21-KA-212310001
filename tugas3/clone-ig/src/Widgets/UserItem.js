@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
@@ -43,12 +43,71 @@ const StoriesItem = ({ item }) => {
     return (
         <View style={stylesStories.container}>
             <View style={stylesStories.storiesList}>
-                <Image source={item.pic_profile} style={stylesStories.storyAva} />
+                {(item.gender) === "M" ? (
+                    <Image source={require('../../assets/icons/icon-boy-1.png')} style={{ ...stylesStories.storyAva, borderWidth: ((item.is_view) ? 0 : 2) }} />
+                ) : (
+                    <Image source={require('../../assets/icons/icon-girl-1.png')} style={{ ...stylesStories.storyAva, borderWidth: ((item.is_view) ? 0 : 2) }} />
+                )}
+
+
                 <Text style={stylesStories.storyName}>{item.username}</Text>
             </View>
         </View>
     )
 }
+
+const SearchPage = ({ item }) => {
+    return (
+        <View style={stylesSearch.search_container}>
+            <View style={stylesSearch.search_account}>
+                <Image source={item.image} style={stylesSearch.search_ava} />
+                <View>
+                    <Text style={{ ...stylesSearch.search_name, fontWeight: 'bold' }}>
+                        {item.name}
+                    </Text>
+                    <Text style={stylesSearch.search_name}>{item.fullname}</Text>
+                </View>
+            </View>
+            <View>
+                <TouchableOpacity style={stylesSearch.btn_follow} activeOpacity={0.6}>
+                    <Text style={stylesSearch.search_name}>Follow</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    )
+}
+
+const stylesSearch = StyleSheet.create({
+    search_container: {
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        alignItems: 'center',
+        padding: 15
+    },
+    search_account: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    search_ava: {
+        width: 40,
+        height: 40,
+        borderRadius: 100,
+        backgroundColor: '#f0f0f0',
+        marginRight: 15
+    },
+    search_name: {
+        fontSize: 16,
+        color: 'white',
+        textAlign: 'left'
+    },
+    btn_follow: {
+        backgroundColor: "purple",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 5
+    }
+})
 
 const stylesFeeds = StyleSheet.create({
     container: {
@@ -100,7 +159,6 @@ const stylesStories = StyleSheet.create({
     storyAva: {
         width: 70,
         height: 70,
-        borderWidth: 3,
         borderColor: 'red',
         borderRadius: 100,
         backgroundColor: '#f0f8ff',
@@ -113,4 +171,4 @@ const stylesStories = StyleSheet.create({
     }
 })
 
-export { FeedsItem, StoriesItem }
+export { FeedsItem, StoriesItem, SearchPage }

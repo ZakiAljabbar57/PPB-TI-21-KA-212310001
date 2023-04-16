@@ -10,7 +10,11 @@ const Feeds = () => {
         //         <Stories />
         //     </ScrollView> */}
         // </View>
-        <FlatList data={DummyFeeds} renderItem={({ item }) => <FeedsItem item={item} />} />
+        <View>
+            {DummyFeeds.map((v, index) => (
+                <FeedsItem item={v} key={index} />
+            ))}
+        </View>
     )
 }
 
